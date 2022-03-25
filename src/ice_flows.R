@@ -10,7 +10,7 @@ library(ggforce)
 theme_set(theme_void())
 my_col <- 'royalblue'
 
-source("grid_utils.R")
+source("src/grid_utils.R")
 
 set.seed(34)
 
@@ -21,7 +21,7 @@ cols <- 20
 f_zig <- (sin(y) * cos(pi*x))
 
 grid <- crossing(x = 1:rows,y = 1:cols) %>%
-  mutate(angle = (sin(y) * cos(pi*x)))
+  mutate(angle = (sin(y/x) * cos(pi*y^3)))
 
 # convert to matrix
 grid_mat <- matrix(data = grid$angle, nrow = rows, ncol = cols)
@@ -189,8 +189,6 @@ ice_flows<-grid_part %>%
   scale_size(range=c(0, 1), trans="log1p")
 
 ice_flows
-
-#animate(ice_flows, width=1000, height = 1000)
 
 
 ggplot2::ggsave(
